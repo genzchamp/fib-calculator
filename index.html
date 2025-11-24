@@ -1,144 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pro Fibonacci Calculator</title>
-<style>
-  body {
-    background: #0e0e0e;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  .container {
-    max-width: 500px;
-    margin: auto;
-  }
-  input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-  }
-  button {
-    width: 100%;
-    padding: 14px;
-    background: gold;
-    color: #000;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  .levels {
-    margin-top: 25px;
-    background: #1a1a1a;
-    padding: 15px;
-    border-radius: 12px;
-  }
-  table {
-    width: 100%;
-    margin-top: 10px;
-  }
-  table th, table td {
-    padding: 8px;
-    text-align: left;
-  }
-  canvas {
-    margin-top: 25px;
-    background: #1a1a1a;
-    width: 100%;
-    border-radius: 10px;
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>360 Halal Hustlers Hub</title>
+  <meta name="description" content="360 Halal Hustlers — halal trading, tools, and digital hustle resources." />
+  <style>
+    /* Root colors — luxury + Islamic-modern blend */
+    :root{
+      --bg:#070708;          /* deep rich black */
+      --card:#0f1112;        /* slightly lighter card */
+      --gold:#D4AF37;        /* warm gold */
+      --muted:#9aa0a6;       /* soft muted text */
+      --neon-ash:#6f7a7f;    /* neon ash accent */
+      --accent: rgba(212,175,55,0.12);
+      --glass: rgba(255,255,255,0.03);
+      --radius:16px;
+      --maxw:1100px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    /* Global layout */
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, var(--bg) 0%, #060607 60%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:24px 16px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .wrap{width:100%;max-width:var(--maxw);} 
+
+    /* Nav */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 6px;}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#b08b2e);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,0.6);}
+    .logo span{font-weight:700;color:#071014}
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.4px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    .menu{display:flex;gap:14px;align-items:center}
+    .menu a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px}
+    .menu a.primary{background:transparent;border:1px solid rgba(212,175,55,0.12);color:var(--gold);font-weight:600}
+    .cta{background:var(--gold);color:#071014;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    /* Mobile menu button */
+    .mobile-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:10px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-top:14px}
+    .hero-card{background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));padding:26px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(2,6,8,0.6);border:1px solid var(--glass)}
+
+    .hero h2{margin:0;font-size:28px}
+    .hero p{color:var(--muted);margin-top:10px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+    .card{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-height:110px}
+    .card h3{margin:0 0 8px 0}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+    .card a{display:inline-block;margin-top:12px;padding:8px 10px;border-radius:8px;text-decoration:none;border:1px solid rgba(212,175,55,0.08);color:var(--gold);font-weight:600}
+
+    .tools-list{display:flex;flex-direction:column;gap:12px}
+    .tool-row{display:flex;align-items:center;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.01);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+    .tool-row small{color:var(--muted)}
+
+    /* Footer */
+    footer{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.02)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:680px){
+      body{padding:16px}
+      .menu{display:none}
+      .mobile-toggle{display:block}
+      .grid{grid-template-columns:1fr}
+      .hero{gap:12px}
+    }
+
+    /* Accent decorations */
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(212,175,55,0.12), rgba(111,122,127,0.06));color:var(--gold);font-weight:600}
+
+  </style>
 </head>
 <body>
-<div class="container">
-  <h2 style="text-align:center;">📈 Pro Fibonacci Calculator</h2>
+  <div class="wrap">
 
-  <label>Swing High:</label>
-  <input type="number" id="high" placeholder="Enter swing high price">
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo"><span>360</span></div>
+        <div>
+          <h1>360 Halal Hustlers Hub</h1>
+          <p>Halal trading, tools & digital hustles — build with barakah</p>
+        </div>
+      </div>
 
-  <label>Swing Low:</label>
-  <input type="number" id="low" placeholder="Enter swing low price">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="menu">
+          <a href="/">Home</a>
+          <a href="/forex/index.html">Forex</a>
+          <a href="/forex/tools/index.html">Forex Tools</a>
+          <a href="/about.html">About</a>
+        </div>
+        <button class="mobile-toggle" id="mobBtn">Menu</button>
+      </div>
+    </nav>
 
-  <button onclick="calculateFib()">Generate Levels</button>
+    <main>
+      <section class="hero-card hero">
+        <div>
+          <h2>Welcome to <span style="color:var(--gold)">360 Halal Hustlers</span></h2>
+          <p>Focus. Build. Grow. A halal-first hub for trading tools, practical strategies, and digital hustle resources. Start with Forex tools designed to fit a funded account workflow.</p>
 
-  <div class="levels" id="output"></div>
+          <div class="grid" style="margin-top:20px">
+            <div class="card">
+              <h3>Forex</h3>
+              <p>Beginner lessons, strategies, and halal trading rules. Start with the Fibonacci strategy we use to trade funded accounts.</p>
+              <a href="/forex/index.html">Explore Forex</a>
+            </div>
 
-  <canvas id="fibChart" height="250"></canvas>
-</div>
+            <div class="card">
+              <h3>Forex Tools</h3>
+              <p>Handy calculators for position sizing, pip value, risk and our Pro Fibonacci tool.</p>
+              <a href="/forex/tools/index.html">Open Tools</a>
+            </div>
 
-<script>
-function calculateFib() {
-  let high = parseFloat(document.getElementById("high").value);
-  let low = parseFloat(document.getElementById("low").value);
+            <div class="card">
+              <h3>Digital Hustles</h3>
+              <p>Future space for digital marketing, content, and productization. We'll scale here as your main hustle grows.</p>
+              <a href="/digital-hustles/index.html">Plan Growth</a>
+            </div>
+          </div>
 
-  if (isNaN(high) || isNaN(low) || high === low) {
-    alert("Invalid input");
-    return;
-  }
+          <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="cta" href="/forex/tools/fib-calculator.html">Open Fibonacci Calculator</a>
+            <a class="badge" href="/forex/strategy/fibonacci-strategy.html">See Strategy Guide</a>
+          </div>
+        </div>
 
-  let diff = high - low;
+        <aside class="hero-card" style="padding:20px;">
+          <h3 style="margin-top:0">Quick Tools</h3>
+          <div class="tools-list">
+            <div class="tool-row">
+              <div>
+                <strong>Fibonacci Calculator</strong>
+                <div><small>Retracements & Extensions — pro version</small></div>
+              </div>
+              <div><a href="/forex/tools/fib-calculator.html">Open</a></div>
+            </div>
 
-  let retracements = {
-    "0%": high,
-    "23.6%": high - diff * 0.236,
-    "38.2%": high - diff * 0.382,
-    "50%": high - diff * 0.5,
-    "61.8%": high - diff * 0.618,
-    "78.6%": high - diff * 0.786,
-    "100%": low
-  };
+            <div class="tool-row">
+              <div>
+                <strong>Position Size</strong>
+                <div><small>Calculate lot size for funded rules</small></div>
+              </div>
+              <div><a href="/forex/tools/position-size.html">Open</a></div>
+            </div>
 
-  let extensions = {
-    "1.272": low - diff * 0.272,
-    "1.618": low - diff * 0.618,
-    "2.0": low - diff * 1,
-    "2.618": low - diff * 1.618
-  };
+            <div class="tool-row">
+              <div>
+                <strong>Pip Calculator</strong>
+                <div><small>Pip values by pair & lot</small></div>
+              </div>
+              <div><a href="/forex/tools/pip-calculator.html">Open</a></div>
+            </div>
+          </div>
 
-  let html = "<h3>Retracement Levels</h3><table>";
-  for (let key in retracements) {
-    html += `<tr><td>${key}</td><td>${retracements[key].toFixed(3)}</td></tr>`;
-  }
-  html += "</table>";
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">
+            <div><strong>Account:</strong> Aqua Funded — $1,000</div>
+            <div style="margin-top:8px"><strong>Focus:</strong> Fibonacci-only trade plan</div>
+          </div>
+        </aside>
+      </section>
 
-  html += "<h3>Extension Levels</h3><table>";
-  for (let key in extensions) {
-    html += `<tr><td>${key}</td><td>${extensions[key].toFixed(3)}</td></tr>`;
-  }
-  html += "</table>";
+      <!-- Sections to expand later -->
+      <section style="margin-top:22px">
+        <div class="hero-card">
+          <h3 style="margin:0 0 8px 0">Roadmap</h3>
+          <p style="color:var(--muted)">Planned features: Strategy guides, calculators, journal CSV export, annotated examples, and courses. Launch priority: Forex Tools → Strategy Library → Digital Hustles.</p>
 
-  document.getElementById("output").innerHTML = html;
+          <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+            <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);min-width:200px">
+              <strong>Phase 1</strong>
+              <div style="color:var(--muted)">Fibonacci Calculator (live), Strategy Guide, Journal CSV</div>
+            </div>
+            <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);min-width:200px">
+              <strong>Phase 2</strong>
+              <div style="color:var(--muted)">Multiple Forex Tools, UI polish, analytics</div>
+            </div>
+            <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);min-width:200px">
+              <strong>Phase 3</strong>
+              <div style="color:var(--muted)">Digital Marketing & Products hub</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  drawChart(high, low, retracements);
-}
+    </main>
 
-function drawChart(high, low, levels) {
-  let canvas = document.getElementById("fibChart");
-  let ctx = canvas.getContext("2d");
+    <footer>
+      <div>
+        <strong>360 Halal Hustlers</strong>
+        <div style="color:var(--muted);font-size:13px">Built for halal growth — trade, learn, & scale with barakah</div>
+      </div>
+      <div style="color:var(--muted);font-size:13px">© <span id="year"></span> • Made with focus</div>
+    </footer>
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  </div>
 
-  let y = 20;
-  let gap = 30;
+  <script>
+    // small scripts
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  for (let key in levels) {
-    ctx.fillStyle = "#fff";
-    ctx.fillText(`${key} → ${levels[key].toFixed(3)}`, 10, y);
-
-    ctx.strokeStyle = "#888";
-    ctx.beginPath();
-    ctx.moveTo(200, y - 5);
-    ctx.lineTo(canvas.width - 20, y - 5);
-    ctx.stroke();
-
-    y += gap;
-  }
-}
-</script>
+    // Mobile menu quick toggle — simple progressive enhancement
+    const mobBtn = document.getElementById('mobBtn');
+    mobBtn && mobBtn.addEventListener('click', ()=>{
+      const menu = document.querySelector('.menu');
+      if(!menu) return;
+      if(getComputedStyle(menu).display === 'none'){
+        menu.style.display = 'flex';
+        menu.style.flexDirection = 'column';
+        menu.style.position = 'absolute';
+        menu.style.right = '16px';
+        menu.style.top = '74px';
+        menu.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))';
+        menu.style.padding = '12px';
+        menu.style.borderRadius = '12px';
+      } else {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
